@@ -12,18 +12,54 @@ st.set_page_config(page_title="나의 꿈 신문 - 내용 추천", page_icon="�
 st.markdown(
     """
     <style>
+      /* hide Streamlit's default chrome so this looks like a standalone window */
+      header[data-testid="stHeader"] { display: none; }
+      #MainMenu { visibility: hidden; }
+      footer { visibility: hidden; }
+
+      html, body, [class*="css"] {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+      }
+
       .stApp {
         background: linear-gradient(135deg, #aeccff 0%, #d6c4ff 100%);
+        min-height: 100vh;
       }
+
       .block-container {
         max-width: 640px;
-        background: rgba(255,255,255,0.72);
-        backdrop-filter: blur(20px);
+        background: rgba(255,255,255,0.65);
+        backdrop-filter: blur(28px) saturate(180%);
+        -webkit-backdrop-filter: blur(28px) saturate(180%);
+        border: 1px solid rgba(255,255,255,0.55);
         border-radius: 18px;
         padding: 2rem 2rem 2.5rem;
-        margin-top: 1.5rem;
-        box-shadow: 0 24px 60px rgba(30,30,60,0.15);
+        margin-top: 4vh;
+        box-shadow: 0 24px 70px rgba(30,30,60,0.20);
       }
+
+      /* macOS-style title bar, spans the full width of the card */
+      .mac-titlebar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: -2rem -2rem 1.5rem;
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+      }
+      .mac-titlebar .dot { width: 11px; height: 11px; border-radius: 50%; }
+      .mac-titlebar .dot.red { background: #ff5f57; }
+      .mac-titlebar .dot.yellow { background: #febc2e; }
+      .mac-titlebar .dot.green { background: #28c840; }
+      .mac-titlebar .mac-title {
+        flex: 1;
+        text-align: center;
+        font-size: 0.82rem;
+        color: #6e6e73;
+        font-weight: 600;
+        margin-right: 44px;
+      }
+
       .brand-badge {
         display:inline-block;
         font-weight:700;
@@ -33,6 +69,31 @@ st.markdown(
         margin-bottom: 1rem;
         font-size: 0.9rem;
       }
+
+      /* form fields */
+      .stTextInput input, .stTextArea textarea, .stSelectbox div[data-baseweb="select"] > div {
+        background: rgba(255,255,255,0.65) !important;
+        border: 1px solid rgba(0,0,0,0.12) !important;
+        border-radius: 10px !important;
+      }
+      .stTextInput input:focus, .stTextArea textarea:focus {
+        border-color: #0A84FF !important;
+        box-shadow: 0 0 0 1px #0A84FF !important;
+      }
+      label, .stMarkdown p { color: #1d1d1f; }
+
+      /* submit button */
+      .stFormSubmitButton button {
+        background: #0A84FF !important;
+        color: #fff !important;
+        border: none !important;
+        border-radius: 12px !important;
+        font-weight: 600 !important;
+        padding: 0.6rem 0 !important;
+      }
+      .stFormSubmitButton button:hover { background: #0a6fe0 !important; }
+      .stFormSubmitButton button p { color: #fff !important; }
+
       .rec-card {
         background: rgba(255,255,255,0.85);
         border-radius: 12px;
@@ -50,6 +111,10 @@ st.markdown(
         font-size: 0.85rem;
       }
     </style>
+    <div class="mac-titlebar">
+      <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+      <span class="mac-title">내용 추천 도우미</span>
+    </div>
     """,
     unsafe_allow_html=True,
 )
